@@ -8,9 +8,8 @@ E-commerce website use Golang as backend
 ## Documentation
 
 ### How to clone?
-1. Copy github browser path
-2. Open terminal and type ``` git clone https://github.com/StanleyChristianDarmawan/quest-rolling-system-RnD ```
-3. Open app with visual studio code with this command ``` code . ```
+1. Open terminal and type ``` git clone https://github.com/StanleyChristianDarmawan/quest-rolling-system-RnD ```
+2. Open app with visual studio code with this command ``` code . ```
 
 
 ### How to run?
