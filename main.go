@@ -21,6 +21,7 @@ func main() {
 	http.HandleFunc("/categories/add", categorycontroller.Add)
 	http.HandleFunc("/categories/edit", categorycontroller.Edit)
 	http.HandleFunc("/categories/delete", categorycontroller.Delete)
+	http.HandleFunc("/categories/search", categorycontroller.Search)
 
 	// Products
 	http.HandleFunc("/products", productcontroller.Index)
@@ -28,6 +29,7 @@ func main() {
 	http.HandleFunc("/products/detail", productcontroller.Detail)
 	http.HandleFunc("/products/edit", productcontroller.Edit)
 	http.HandleFunc("/products/delete", productcontroller.Delete)
+	http.HandleFunc("/products/search", productcontroller.Search)
 
 	// Cart
 	http.HandleFunc("/cart", cartcontroller.Index)
