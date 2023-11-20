@@ -37,7 +37,16 @@
         <hr>
         <div class="col d-flex justify-content-between">
           <a href="/categories/add" class="btn btn-primary">Add Categories</a>
-          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..">
+          <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <form class="form-inline" action="/categories/search" method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control mr-2" name="query" placeholder="Search..." aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+          </div>
         </div>
         <table id="myTable" class="table table-bordered mt-2 text-center">
             <thead>
