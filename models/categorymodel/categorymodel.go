@@ -76,3 +76,34 @@ func Delete(id int) error {
 	_, err := config.DB.Exec(`DELETE FROM categories WHERE id = ?`, id)
 	return err
 }
+
+func Search(query string) []entities.Category {
+	rows, err := config.DB.Query(`
+		SELECT id, name, created_at, updated_at FROM categories
+		WHERE name LIKE ?
+	`, "%"+query+"%")
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer rows.Close()
+
+	var categories []entities.Category
+
+	for rows.Next() {
+		var category entities.Category
+		if err := rows.Scan(
+			&category.Id, 
+			&category.Name, 
+			&category.CreatedAt, 
+			&category.UpdatedAt,
+		); err != nil {
+			panic(err)
+		}
+
+		categories = append(categories, category)
+	}
+
+	return categories
+}

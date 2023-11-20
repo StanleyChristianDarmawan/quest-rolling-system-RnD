@@ -105,3 +105,18 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/categories", http.StatusSeeOther)
 }
+
+func Search(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		query := r.FormValue("query")
+		results := categorymodel.Search(query)
+		data := map[string]any{
+			"categories": results,
+		}
+		temp, err := template.ParseFiles("page/category/index.html")
+		if err != nil {
+			panic(err)
+		}
+		temp.Execute(w, data)
+	}
+}

@@ -156,3 +156,19 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/products", http.StatusSeeOther)
 }
+
+func Search(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		query := r.FormValue("query")
+		results := productmodel.Search(query)
+		data := map[string]any{
+			"products": results,
+		}
+		temp, err := template.ParseFiles("page/product/index.html")
+		if err != nil {
+			panic(err)
+		}
+		temp.Execute(w, data)
+	}
+}
+

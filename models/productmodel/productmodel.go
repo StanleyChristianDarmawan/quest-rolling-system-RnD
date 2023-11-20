@@ -133,3 +133,45 @@ func Delete(id int) error {
 	_, err := config.DB.Exec(`DELETE FROM products WHERE id = ?`, id)
 	return err
 }
+
+func Search(query string) []entities.Product {
+	rows, err := config.DB.Query(`
+		SELECT 
+			products.id, 
+			products.name, 
+			categories.name as category_name,
+			products.stock, 
+			products.description, 
+			products.created_at, 
+			products.updated_at FROM products
+		JOIN categories ON products.category_id = categories.id
+		WHERE products.name LIKE ?
+	`, "%"+query+"%")
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer rows.Close()
+
+	var products []entities.Product
+
+	for rows.Next() {
+		var product entities.Product
+		if err := rows.Scan(
+			&product.Id,
+			&product.Name,
+			&product.Category.Name,
+			&product.Stock,
+			&product.Description,
+			&product.CreatedAt,
+			&product.UpdatedAt,
+		); err != nil {
+			panic(err)
+		}
+
+		products = append(products, product)
+	}
+
+	return products
+}
